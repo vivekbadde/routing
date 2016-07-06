@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Module Configuration</title>
+	<script type="text/javascript" src=https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js></script>
+	<script src="https://code.angularjs.org/1.5.7/angular-route.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+			 var module = angular.module("App", ['ngRoute']);
+    module.config(['$routeProvider',
+        function($routeProvider) {
+            $routeProvider.
+                    when('/route1/:param', { //Route 1
+                        templateUrl: 'templates/firstroute.html',
+                        controller: 'RouteController'
+                    }).
+                   
+                    otherwise({ //Default Route
+                        redirectTo: '/',
+                        templateUrl:'templates/index1.html',
+                        controller:'IndexController'
+                    });
+        }]);
+
+    module.controller("RouteController", function($scope, $routeParams) {
+        $scope.param = $routeParams.param;
+       // alert($scope.param);
+    })
+    .controller('IndexController',function($scope){
+        $scope.message = "Home page";
+    })
+	</script>
+	<style type="text/css">	
+		
+		.btn:hover
+		{
+			background-color:green; 
+		}
+		div
+		{
+			border: 1px solid blue;
+		}
+	</style>
+</head>
+<body ng-app="App" container>
+<ol >
+	<li><a href="#/route1/param1">Route 1</a></li>
+
+</ol>
+<div ng-view></div>
+</body>
+</html>
